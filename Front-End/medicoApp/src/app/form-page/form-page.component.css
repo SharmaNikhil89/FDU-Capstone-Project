@@ -1,0 +1,159 @@
+*{
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    background-color: #f8f9fa;
+    padding: 10px 0;
+  }
+
+  .navbar-brand img {
+    margin-right: 10px;
+  }
+
+  .nav-title {
+    margin: 0;
+    font-size: 24px;
+    color: #bbbbbb;
+  }
+
+  .navbar-nav .nav-item {
+    margin-right: 10px;
+  }
+
+  .btn:visited{
+    color:#04475b;
+  }
+
+  a:link {
+    color:#ddd;
+  }
+
+  a:visited {
+    color:#9cdbe3;
+  }
+
+  a:hover {
+    color:#069091;
+  }
+
+  a:active {
+    color:#04475b;
+  }
+
+  .custom-card {
+    margin: 2vh 2vw; /* 2vh top and bottom, 2vw left and right */
+    border-radius: 5px; /* Border radius for all four sides */
+    background-color: #cce3ee; /* Light blue background color */
+  }
+
+.row{
+    margin: 2%;
+}
+
+.cardContentPharma{
+    margin: 2%;
+}
+
+.selected {
+    border: 2px solid green; /* Add border to highlight the selected card */
+  }
+
+.bottomSection{
+    margin: 2%;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #212529;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .footer-logo {
+    margin-top: 15px;
+    margin-right: 10px;
+  }
+
+  .footer-text {
+    padding-bottom: 10px;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #bbbbbb;
+  }
+
+  .custom-form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .custom-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: #212529;
+  }
+  
+  .sub-label {
+    font-size: 0.75rem;
+    color: #6c757d;
+  }
+  
+  /* Optional: Adjust spacing between form rows */
+  .row .custom-form-group {
+    margin-bottom: 2rem;
+  }
+
+  .custom-radio-label {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-radio-label:hover {
+    background-color: #e9ecef;
+  }
+  
+  .custom-radio-label input[type="radio"] {
+    display: none;
+  }
+  
+  .custom-radio-label input[type="radio"]:checked + .form-check-label {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .custom-radio-label input[type="radio"]:checked + .form-check-label::before {
+    background-color: #fff;
+    border-color: #007bff;
+  }
+
+  .selected-chip {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0, 128, 0, 0.6);
+    color: white;
+    padding: 3px 6px; /* Adjust padding as needed */
+    font-size: 12px; /* Adjust font size as needed */
+    border-radius: 3px;
+}
+
+
+

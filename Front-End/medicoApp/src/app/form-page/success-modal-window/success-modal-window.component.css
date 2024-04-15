@@ -1,0 +1,11 @@
+.modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    background-color: #333; /* Change background color to ensure contrast with text */
+    color: white; /* Set text color to white */
+    padding: 20px; /* Add padding for better readability */
+  }

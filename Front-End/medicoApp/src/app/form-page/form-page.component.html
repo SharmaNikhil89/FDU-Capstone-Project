@@ -1,0 +1,161 @@
+<section class="container">
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="width: 100%;">
+        <div class="container-fluid" >
+            <a class="navbar-brand" href="landingPage" matTooltip="Are you sure you want to leave the current page? This will reset the form input data.">    
+                <img src="assets/images/big-logo.png" alt="Logo" width="80" height="80">
+            </a>
+            <h2 class="nav-title">Medico App</h2>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link" href="landingPage" matTooltip="Are you sure you want to leave the current page? This will reset the form input data.">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="aboutPage" matTooltip="Are you sure you want to leave the current page? This will reset the form input data.">About/Contact Us</a>
+                </li>
+                <li class="nav-item">
+                <a href="home" class="btn btn-light" matTooltip="Thank for visiting! Have a healthy life Take Care">Sign Out</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+        </nav>
+    </header>
+    <div class="card text-center custom-card">
+        <div class="card-header">
+            <h2 class="card-title">Prescription Form</h2>
+        </div>
+        <div class="card-body">
+        <form [formGroup]="myForm">
+
+            <!-- Section 1 -->
+
+            <div class="row">
+                <div class="col-5">
+                  <div class="custom-form-group mb-3">
+                    <label for="name">Full Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
+                  </div>
+                </div>
+
+                <div class="col-2"></div>
+
+                <div class="col-5">
+                  <div class="custom-form-group mb-3">
+                    <label for="medicine">Type Medicine</label>
+                    <input type="text" class="form-control" id="medicine" placeholder="Type Medicine" formControlName="searchMedicine">
+                    <label for="medicine" class="sub-label">Note*: If its more than 1 medicine, then separate each medicine by a comma ( , )</label>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+
+            <div class="row">
+                <div class="col-12 text-center">
+                  <div>Prescription for? :</div>
+                </div>
+            </div>
+
+            <!-- Section 3 -->
+
+            <div class="row">
+                <div class="col-4"></div>
+
+                <div class="col-2">
+                  <div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="radioOption" id="radioOption1" value="immigrant" style="margin-top: 6vh;">
+                      <label class="form-check-label custom-radio-label" for="radioOption1">International Prescription</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-2">
+                  <div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="radioOption" id="radioOption2" value="local" style="margin-top: 6vh;">
+                      <label class="form-check-label custom-radio-label" for="radioOption2">Local Prescription</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-4"></div>
+            </div>
+
+            <!-- Section 4 -->
+
+            <div class="row">
+                <div class="col-md-2"></div> <!-- Adjust column size as needed -->
+                <div class="col-md-8">
+                  <div class="text-center mb-3">
+                    <label class="form-label" for="inputGroupFile02">Upload Prescription</label>
+                  </div>
+                  <div class="input-group">
+                    <input type="file" class="form-control" id="inputGroupFile02" formControlName="file" accept=".pdf, image/*">
+                    <label class="input-group-text" for="inputGroupFile02">Doctor's Prescription Required</label>
+                  </div>
+                </div>
+                <div class="col-md-2"></div> <!-- Adjust column size as needed -->
+            </div>
+
+            </form>
+
+
+            <hr class="my-4">
+            <div>Choose a pharmacy from below:</div>
+            <div class="row" *ngFor="let row of chunkArray(pharmacyRecords, 4)">
+
+                <div class="col-3" *ngFor="let card of row">
+                    <div class="card cardContentPharma" [ngClass]="{ 'selected': selectedCard === card }" (click)="selectCard(card)">
+                        <div class="card-body">
+                            <p>Name : {{card.name}}</p> <br>
+                            <p> Address : {{card.address}}</p> <br>
+                            <p>Distance : {{card.distance}}</p> <br>
+                            <div class="selected-chip" *ngIf="selectedCard === card">Selected</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="bottomSection">
+                <button  class="btn btn-primary" (click)="submitForm()" [disabled]="!isFormValid()"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Submit Form
+                </button>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <footer class="footer">
+        <img class="footer-logo" src="assets/images/small-logo.png" alt="Logo" width="50" height="50">
+        <p class="footer-text">Copyright © of Medico 2024</p>
+    </footer>
+
+</section>
+
+
+<!-- First Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: none; width: 50%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Caution</h5>
+            </div>
+            <div class="modal-body">
+                Are you sure to go ahead with the provided input
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="resetForm();openDialog()">Yes! Go Ahead</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
