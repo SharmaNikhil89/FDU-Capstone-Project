@@ -3,23 +3,23 @@ const router = express.Router();
 const pharmacy = require("../models/pharmacy");
 
 //get nearest pharmacies.
-router.get("/getNearestPharmacy/:lat/:log", (req, res, next) => {
+router.get("/getNearbyPharmacies/:latitude/:logitude", (req, res, next) => {
   //input lat and lon for api.
-  var userlat = req.params.lat;
-  var userlog = req.params.log;
+  var userlatitude = req.params.latitude;
+  var userlogitude = req.params.logitude;
   try {
-    if (!validateInputs(userlat, userlog).valid)
+    if (!validateInputs(userlatitude, userlogitude).valid)
       res
         .status(400)
-        .json({ success: false, msg: validateInputs(userlat, userlog).msg });
+        .json({ success: false, msg: validateInputs(userlatitude, userlogitude).msg });
     else {
       //send input to model to get result.
-      pharmacy.getNearestPharmacy(userlat, userlog, (err, result) => {
+      pharmacy.getNearbyPharmacies(userlatitude, userlogitude, (err, result) => {
         if (err)
           res.status(500).json({
             success: false,
             msg:
-              "Something went wrong."
+              "Something went wrong. (2)"
           });
         else
           res.status(200).json({
@@ -32,23 +32,23 @@ router.get("/getNearestPharmacy/:lat/:log", (req, res, next) => {
   } catch (e) {
     res.status(500).json({
       success: false,
-      msg: "Something went wrong."
+      msg: "Something went wrong. (3)"
     });
   }
 });
 
 //validate input.
-var validateInputs = function(userlat, userlog) {
-  if (userlat === "" && userlog === "")
+var validateInputs = function(userlatitude, userlogitude) {
+  if (userlatitude === "" && userlogitude === "")
     return { valid: false, msg: "Latitude and Longitude should not be empty." };
-  if (isNaN(userlat) || isNaN(userlog))
+  if (isNaN(userlatitude) || isNaN(userlogitude))
     return {
       valid: false,
       msg: "Latitude and Longitude should be numbers."
     };
-  if (!(userlat > -90 && userlat < 90))
+  if (!(userlatitude > -90 && userlatitude < 90))
     return { valid: false, msg: "Please enter a valid latitude." };
-  if (!(userlog > -180 && userlog < 180))
+  if (!(userlogitude > -180 && userlogitude < 180))
     return { valid: false, msg: "Please enter a valid longitude." };
   return { valid: true, msg: "Valid data." };
 };

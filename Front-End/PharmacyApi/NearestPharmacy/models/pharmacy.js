@@ -3,7 +3,7 @@ const path = require("path");
 const _ = require("underscore");
 
 //nearest pharmacies function.
-module.exports.getNearestPharmacy = function(lat1, lon1, callback) {
+module.exports.getNearbyPharmacies = function(latitude1, lonitude1, callback) {
   //data from csv.
   csv()
     .fromFile(path.join(__dirname, "../data/pharmacies.csv"))
@@ -14,8 +14,8 @@ module.exports.getNearestPharmacy = function(lat1, lon1, callback) {
         jsonObj.forEach(obj => {
           obj["distance"] = parseFloat(
             distance(
-              lat1,
-              lon1,
+              latitude1,
+              lonitude1,
               parseFloat(obj.latitude),
               parseFloat(obj.longitude)
             )
@@ -40,7 +40,7 @@ module.exports.getNearestPharmacy = function(lat1, lon1, callback) {
         );
       } catch (e) {
         callback(
-          "Something went wrong. Please contact system administrator.",
+          "Something went wrong. (1)",
           null
         );
       }
@@ -48,21 +48,21 @@ module.exports.getNearestPharmacy = function(lat1, lon1, callback) {
 };
 
 //calculate distance between 2 co-ordinates.
-var distance = function(userlat, userlog, pharmacylat, pharmacylog) {
+var distance = function(userlatitude, userlogitude, pharmacylatitude, pharmacylogitude) {
   //if both latitudes and longitudes are same then return 0.
-  if (userlat == pharmacylat && userlog == pharmacylog) {
+  if (userlatitude == pharmacylatitude && userlogitude == pharmacylogitude) {
     return 0;
   } else {
     //degrees to radius.
-    var radiusOfuserLat = (Math.PI * userlat) / 180;
-    var radiusOpharmacyLat = (Math.PI * pharmacylat) / 180;
-    var theta = userlog - pharmacylog;
+    var radiusOfuserLatitude = (Math.PI * userlatitude) / 180;
+    var radiusOpharmacyLatitude = (Math.PI * pharmacylatitude) / 180;
+    var theta = userlogitude - pharmacylogitude;
     var radtheta = (Math.PI * theta) / 180;
     //calculating distance.
     var dist =
-      Math.sin(radiusOfuserLat) * Math.sin(radiusOpharmacyLat) +
-      Math.cos(radiusOfuserLat) *
-        Math.cos(radiusOpharmacyLat) *
+      Math.sin(radiusOfuserLatitude) * Math.sin(radiusOpharmacyLatitude) +
+      Math.cos(radiusOfuserLatitude) *
+        Math.cos(radiusOpharmacyLatitude) *
         Math.cos(radtheta);
     if (dist > 1) {
       dist = 1;
