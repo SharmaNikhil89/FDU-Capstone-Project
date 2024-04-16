@@ -44,7 +44,7 @@ export class FormPageComponent implements OnInit{
   pharmacyRecords: [] = [];
   fetchdata(){
 
-    this.http.get<any>('http://localhost:3000/pharmacy/getNearestPharmacy/49.172151447739914/-122.97753031844071').subscribe(
+    this.http.get<any>('http://localhost:3000/pharmacy/getNearbyPharmacies/49.172151447739914/-122.97753031844071').subscribe(
      res => {
       this.pharmacyRecords = res.data;
      },
