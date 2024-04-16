@@ -1,3 +1,3 @@
 url -
-http://localhost:3000/pharmacy/getNearestPharmacy/49.172151447739914/-122.97753031844071
+http://localhost:3000/pharmacy/getNearbyPharmacies/49.172151447739914/-122.97753031844071
 
